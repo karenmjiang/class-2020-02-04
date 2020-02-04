@@ -1,0 +1,20 @@
+---
+title: "Congress"
+author: "Karen Jiang"
+date: "2/4/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(gov.1005.data)
+library(tidyverse)
+```
+
+```{r}
+data(congress)
+
+congress %>% arrange(desc(age))
+```
+
