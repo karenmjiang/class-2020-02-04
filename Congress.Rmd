@@ -15,6 +15,25 @@ library(tidyverse)
 ```{r}
 data(congress)
 
-congress %>% arrange(desc(age))
+congress_age_by_party <- congress %>%
+  filter(party == "D" | party == "R") %>% 
+  group_by(year, party) %>%
+  summarize(avg_age = mean(age))
+
+color_group = c("blue","red")
+
+ggplot(congress_age_by_party, aes(x=year, y=avg_age, color=party)) + 
+  geom_line() + 
+  labs(
+    title="Average Age of Members of Congress",
+    subtitle="At start of term, 1947-2013"
+  ) + 
+  scale_color_manual(values = color_group) + 
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.position = "none"
+  )
+
 ```
 
